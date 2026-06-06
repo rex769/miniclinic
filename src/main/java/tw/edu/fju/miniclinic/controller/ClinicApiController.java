@@ -30,11 +30,6 @@ public class ClinicApiController {
     @Autowired
     private PatientRepository patientRepo;
 
-    // 【T01】服務存活測試：驗收必須回傳 {"status":"ok"}
-    @GetMapping("/health")
-    public ResponseEntity<Map<String, String>> getHealth() {
-        return ResponseEntity.ok(Map.of("status", "ok"));
-    }
 
     // 【T02 & T03】醫師清單與欄位測試：回傳所有醫生清單（陣列長度需 >= 5）
     @GetMapping("/doctors")
