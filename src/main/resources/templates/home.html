@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首頁 - MiniClinic</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #0F2443; border-bottom: 3px solid #14B8A6; padding-bottom: 8px; }
+        nav { background: #0F2443; padding: 12px; border-radius: 8px; margin-bottom: 24px; }
+        nav a { color: white; margin-right: 20px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: #5EEAD4; }
+        .welcome { background: #F8FAFC; padding: 20px; border-radius: 6px; border-left: 5px solid #14B8A6; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a th:href="@{/}">首頁</a>
+        <a th:href="@{/doctors}">醫師清單</a>
+        <a th:href="@{/appointment/new}">線上掛號</a>
+        <a th:href="@{/patients}">病歷資料</a>
+        <a th:href="@{/appointments}">掛號記錄</a>
+        <a th:href="@{/stats}">統計資訊</a>
+        <a th:href="@{/login}">醫師登入</a>
+    </nav>
+
+    <h1>歡迎來到 MiniClinic 社區診所掛號系統</h1>
+    <div class="welcome">
+        <p>本系統提供完善的醫療資訊管理服務，包含醫師排班查詢、線上即時掛號、病歷快速建檔與全院營運數據指標統計。</p>
+        <p>醫事人員請點擊導覽列的「醫師登入」進入管理後台檢視每日門診掛號摘要與執行臨床狀態調整。</p>
+    </div>
+</body>
+</html>
