@@ -1,6 +1,10 @@
 package tw.edu.fju.miniclinic.controller;
 
-import jakarta.validation.Valid;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,12 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import tw.edu.fju.miniclinic.model.*;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import jakarta.validation.Valid;
+import tw.edu.fju.miniclinic.model.Appointment;
+import tw.edu.fju.miniclinic.model.AppointmentForm;
+import tw.edu.fju.miniclinic.model.AppointmentRepository;
+import tw.edu.fju.miniclinic.model.Doctor;
+import tw.edu.fju.miniclinic.model.DoctorRepository;
+import tw.edu.fju.miniclinic.model.Patient;
+import tw.edu.fju.miniclinic.model.PatientRepository;
 
 @Controller
 public class AppointmentController {

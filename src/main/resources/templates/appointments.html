@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>掛號記錄 - MiniClinic</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #0F2443; border-bottom: 3px solid #14B8A6; padding-bottom: 8px; }
+        nav { background: #0F2443; padding: 12px; border-radius: 8px; margin-bottom: 24px; }
+        nav a { color: white; margin-right: 20px; text-decoration: none; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th { background: #0F2443; color: white; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #E2E8F0; }
+        .empty { text-align: center; color: #94A3B8; padding: 40px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a th:href="@{/}">首頁</a> | 
+        <a th:href="@{/doctors}">醫師清單</a> | 
+        <a th:href="@{/appointment/new}">線上掛號</a> |
+        <a th:href="@{/appointments}">掛號記錄</a> |
+        <a th:href="@{/stats}">掛號統計</a>
+    </nav>
+
+    <h1>全院掛號記錄清單</h1>
+
+    <table th:if="${not #lists.isEmpty(appointments)}">
+        <thead>
+            <tr>
+                <th>掛號編號</th>
+                <th>病歷號</th>
+                <th>病患姓名</th>
+                <th>看診醫師</th>
+                <th>科別</th>
+                <th>看診日期</th>
+                <th>看診時段</th>
+                <th>掛號狀態</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="appt : ${appointments}">
+                <td th:text="${appt.apptId}">1</td>
+                <td th:text="${appt.patient.chartNo}">TEST00001</td>
+                <td th:text="${appt.patient.name}">姓名</td>
+                <td th:text="${appt.doctor.name}">醫師</td>
+                <td th:text="${appt.doctor.department}">科別</td>
+                <td th:text="${appt.apptDate}">2026-05-01</td>
+                <td th:text="${appt.timeSlot}">AM</td>
+                <td th:text="${appt.status}">BOOKED</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p class="empty" th:if="${#lists.isEmpty(appointments)}">目前尚無任何預約掛號記錄。</p>
+</body>
+</html>

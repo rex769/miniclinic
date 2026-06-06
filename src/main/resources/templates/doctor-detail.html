@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${doctor.name} + ' 醫師詳細資訊 - MiniClinic'">醫師詳細資訊</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #0F2443; border-bottom: 3px solid #14B8A6; padding-bottom: 8px; }
+        .card { background: #F8FAFC; padding: 24px; border-left: 5px solid #14B8A6; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        dt { font-weight: bold; color: #0F2443; margin-top: 12px; font-size: 16px; }
+        dd { margin-left: 0; margin-bottom: 12px; color: #334155; font-size: 15px; }
+        .back-btn { display: inline-block; margin-top: 20px; color: white; background-color: #0F2443; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; }
+        .back-btn:hover { background-color: #1E3A8A; }
+    </style>
+</head>
+<body>
+    <h1 th:text="${doctor.name} + ' 醫師背景介紹'">醫師姓名</h1>
+    
+    <div class="card">
+        <dl>
+            <dt>🏥 醫療人員編號：</dt>
+            <dd th:text="${doctor.doctorId}">編號</dd>
+            
+            <dt>👨‍⚕️ 醫師姓名：</dt>
+            <dd th:text="${doctor.name}">姓名</dd>
+            
+            <dt>🗂️ 隸屬專科部門：</dt>
+            <dd th:text="${doctor.department}">科別</dd>
+            
+            <dt>🎯 臨床主治專長：</dt>
+            <dd th:text="${doctor.specialty}">專長</dd>
+        </dl>
+    </div>
+    
+    <a th:href="@{/doctors}" class="back-btn">← 返回醫師團隊清單</a>
+</body>
+</html>
