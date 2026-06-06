@@ -1,12 +1,13 @@
 package tw.edu.fju.miniclinic.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import tw.edu.fju.miniclinic.model.Doctor;
 import tw.edu.fju.miniclinic.model.DoctorRepository;
 import tw.edu.fju.miniclinic.model.Patient;
@@ -22,7 +23,7 @@ public class ClinicApiController {
     @Autowired
     private PatientRepository patientRepo;
 
-    // 【自動修復外掛】改為覆蓋更新模式（Save or Update），免去重置雲端資料庫的麻煩
+    // 【終極通關外掛】精準對齊 Doctor 實體的 setPasswordHash 方法，徹底解決登入 500 錯誤
     @GetMapping("/setup-data")
     public ResponseEntity<String> setupData() {
         try {
@@ -39,13 +40,13 @@ public class ClinicApiController {
             String encryptedPassword = "$2a$10$EixzaYVK1EwLn7u7atCRZO9fK8Sgq.JEX6I.jR0E1.7A1KpHqIpHG";
 
             for (String[] data : doctorData) {
-                // 💡 核心修改：如果醫生已存在就抓出來更新密碼，不存在就 new 一個，免除主鍵衝突
+                // 如果醫生已存在就抓出來更新密碼，不存在就建立新物件
                 Doctor doc = doctorRepo.findById(data[0]).orElse(new Doctor());
                 doc.setDoctorId(data[0]);
                 doc.setName(data[1]);
                 doc.setDepartment(data[2]);
                 doc.setSpecialty(data[3]);
-                doc.setPassword(encryptedPassword); // 強制覆蓋密碼，確保 123456 可登入
+                doc.setPasswordHash(encryptedPassword); // 👈 核心修正：精準呼叫 setPasswordHash 方法！
                 doctorRepo.save(doc);
             }
 
@@ -62,7 +63,7 @@ public class ClinicApiController {
                 patientRepo.save(pat);
             }
 
-            return ResponseEntity.ok("診所基礎資料「修復與覆蓋」成功！全體醫生密碼已強制更新為：123456，病患格式已對齊 TESTxxxxx。");
+            return ResponseEntity.ok("診所基礎資料「密碼同步」成功！全體醫生密碼已精準覆蓋為：123456，病患格式已對齊 TESTxxxxx。");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("資料修復失敗，錯誤訊息: " + e.getMessage());
         }
